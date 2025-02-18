@@ -29,5 +29,12 @@ public class Botiga {
         return trobats;
     }
 
-
+    public int getStock(Producte prod) {
+        if (Productes.contains(prod)) {
+            return Stock.get(Productes.indexOf(prod));
+        }
+        else {
+            return 0; // La botiga no te el producte
+        }
+    }
 }
