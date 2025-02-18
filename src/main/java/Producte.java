@@ -14,4 +14,8 @@ public class Producte {
     public void setPrecio(double newPrecio) {
         this.precio = newPrecio;
     }
+
+    public String getNombre() {
+        return this.nombre;
+    }
 }
