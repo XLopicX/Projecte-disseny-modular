@@ -83,4 +83,14 @@ public class Botiga {
     public String getBilletera() {
         return this.billetera;
     }
+
+    public ArrayList buscarProductoOrigen(String input) {
+        ArrayList<Producte> producteBuscat = new ArrayList<>();
+        for (Producte prod : Productes) {
+            if (prod.getOrigen().equals(input)) {
+                producteBuscat.add(prod);
+            }
+        }
+        return producteBuscat;
+    }
 }

@@ -18,4 +18,8 @@ public class Producte {
     public String getNombre() {
         return this.nombre;
     }
+
+    public String getOrigen() {
+        return this.origen;
+    }
 }
