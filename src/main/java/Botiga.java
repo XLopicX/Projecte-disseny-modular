@@ -2,11 +2,13 @@ import java.util.ArrayList;
 
 public class Botiga {
     private String nombreTienda;
+    private String billetera;
     private ArrayList<Producte> Productes = new ArrayList<>();
     private ArrayList<Integer> Stock = new ArrayList<>();
 
-    public Botiga(String nombreTienda){
+    public Botiga(String nombreTienda, String billetera){
         this.nombreTienda = nombreTienda;
+        this.billetera = billetera;
     }
 
     public void addProducto(Producte producte, Integer stock){
@@ -36,5 +38,9 @@ public class Botiga {
         else {
             return 0; // La botiga no te el producte
         }
+    }
+
+    public String getBilletera() {
+        return this.billetera;
     }
 }
