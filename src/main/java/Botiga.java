@@ -93,4 +93,13 @@ public class Botiga {
         }
         return producteBuscat;
     }
+    public ArrayList getOrigenes() {
+        ArrayList<String> origenes = new ArrayList<>();
+        for (Producte prod : Productes) {
+            if (!origenes.contains(prod.getOrigen())) {
+                origenes.add(prod.getOrigen());
+            }
+        }
+        return origenes;
+    }
 }
