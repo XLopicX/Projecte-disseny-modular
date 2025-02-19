@@ -14,19 +14,59 @@ public class Botiga {
         Stock.add(stock);
     }
 
-    public int buscarProducto(String input) {
+    public ArrayList buscarProducto(String input, int filtro) {
+        ArrayList<Producte> producteBuscat = new ArrayList<>();
+        ArrayList<Producte> producteOrdenat = new ArrayList<>();
         input = input.toLowerCase();
-
         int trobats = 0;
-
         for (Producte prod : Productes) {
             if (prod.getNombre().toLowerCase().contains(input)) {
                 trobats++;
-                System.out.println(String.format("[%d] %s", trobats, prod.getNombre()));
+                producteBuscat.add(prod);
+                producteOrdenat.add(prod);
+                //System.out.println(String.format("[%d] %s", trobats, prod.getNombre()));
             }
         }
-
-        return trobats;
+        switch (filtro){
+            case 1:{
+                //filtrar de menor a mayor
+                Producte hold;
+                for (int i = 0; i < producteBuscat.size() ; i++) {
+                    for ( int k = 0 ; k < (producteBuscat.size()-1); k++) {
+                        hold = producteOrdenat.get(k);
+                            if(hold.getPrecio() < producteBuscat.get(k+1).getPrecio()){
+                                producteOrdenat.set(k, hold);
+                                producteOrdenat.set(k+1, producteBuscat.get(k+1));
+                            }
+                            else {
+                                producteOrdenat.set(k, producteBuscat.get(k+1));
+                                producteOrdenat.set(k+1, hold);
+                            }
+                    }
+                    producteBuscat = producteOrdenat;
+                }
+                break;
+            }
+            case 2: {
+                Producte hold;
+                for (int i = 0; i < producteBuscat.size() ; i++) {
+                    for ( int k = 0 ; k < (producteBuscat.size()-1); k++) {
+                        hold = producteOrdenat.get(k);
+                        if(hold.getPrecio() > producteBuscat.get(k+1).getPrecio()){
+                            producteOrdenat.set(k, hold);
+                            producteOrdenat.set(k+1, producteBuscat.get(k+1));
+                        }
+                        else {
+                            producteOrdenat.set(k, producteBuscat.get(k+1));
+                            producteOrdenat.set(k+1, hold);
+                        }
+                    }
+                    producteBuscat = producteOrdenat;
+                }
+                break;
+            }
+        }
+        return producteOrdenat;
     }
 
     public int getStock(Producte prod) {
