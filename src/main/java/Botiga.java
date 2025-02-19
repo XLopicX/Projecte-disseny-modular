@@ -16,7 +16,7 @@ public class Botiga {
         Stock.add(stock);
     }
 
-    public ArrayList buscarProducto(String input, int filtro) {
+    public ArrayList<Producte> buscarProducto(String input, int filtro) {
         ArrayList<Producte> producteBuscat = new ArrayList<>();
         ArrayList<Producte> producteOrdenat = new ArrayList<>();
         input = input.toLowerCase();
