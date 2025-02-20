@@ -57,12 +57,8 @@ public class Carrito {
         }
     }
 
-    public void generarFactura() {
-        for (String producte : lista.keySet()) {
-            int cantidad = lista.get(producte);
-            System.out.println(String.format("%s: %d", producte, cantidad));
-        }
-        System.out.println(String.format("Precio final: %.2f€", precioTotal));
+    public double precioFinal() {
+        return precioTotal;
     }
 
     public ArrayList<Producte> getProductesCarrito() {
