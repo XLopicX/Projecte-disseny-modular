@@ -26,10 +26,13 @@ public class Menu {
     static Scanner scanner = new Scanner(System.in);
     static Scanner scannerI = new Scanner(System.in);
     static Scanner scannerS = new Scanner(System.in);
+    static Scanner scannerSS = new Scanner(System.in);
     // defineix les opcions disponibles a cada menu https://stackoverflow.com/questions/1005073/initialization-of-an-arraylist-in-one-line
-    static List<Integer> RPrincipal = Arrays.asList(1,2,3,0);
+    static List<Integer> RPrincipal = Arrays.asList(1,2,3,4,0);
     static ArrayList<Integer> RClassic = new ArrayList<>(Arrays.asList(1,2,0));
     static ArrayList<Integer> RClassicBusqueda = new ArrayList<>(Arrays.asList(1,2,0));
+    static ArrayList<Integer> RClassicOrigen = new ArrayList<>(Arrays.asList(0));
+    static ArrayList<Integer> RCarrito = new ArrayList<>(Arrays.asList(0));
     static List<Integer> RAClassic = Collections.singletonList(1);
     static List<Integer> RCredits = Collections.singletonList(1);
 
@@ -75,6 +78,40 @@ public class Menu {
                 try {
                     opcio = scanner.nextInt();
                     if (RClassicBusqueda.contains(opcio)) {
+                        valid = true;
+                    }
+                    else {
+                        System.out.println("Resposta Invalida");
+                    }
+                }
+                catch (Exception e) {
+                    System.out.println("Resposta Invalida");
+                    scanner.reset();
+                }
+            }
+        }
+        else if (menu.equals("ClassicOrigen")) {
+            while (!valid) {
+                try {
+                    opcio = scanner.nextInt();
+                    if (RClassicOrigen.contains(opcio)) {
+                        valid = true;
+                    }
+                    else {
+                        System.out.println("Resposta Invalida");
+                    }
+                }
+                catch (Exception e) {
+                    System.out.println("Resposta Invalida");
+                    scanner.reset();
+                }
+            }
+        }
+        else if (menu.equals("Carrito")) {
+            while (!valid) {
+                try {
+                    opcio = scanner.nextInt();
+                    if (RCarrito.contains(opcio)) {
                         valid = true;
                     }
                     else {
@@ -137,6 +174,7 @@ public class Menu {
                     [1] Ver Catalogo completo
                     [2] Buscar un producto
                     [3] Buscar un producto por origen
+                    [4] Carrito
                     [0] Salir del programa
                     """;
         System.out.println(menu);
@@ -148,7 +186,7 @@ public class Menu {
         String menu2Variable="";
         llistaProductes = greenClick.buscarProducto("",filtre);
         for (int i = 0; i < llistaProductes.size(); i++ ){
-            menu2Variable += "["+(i+3)+"] "+ llistaProductes.get(i).getNombre()+"\n";
+            menu2Variable += "["+(i+3)+"] "+ llistaProductes.get(i).getNombre()+" Origen: "+ llistaProductes.get(i).getOrigen()+" Precio: "+ llistaProductes.get(i).getPrecio()  +"\n";
         }
         String menu2 = """
                         \nSelecciona un filtro:
@@ -169,7 +207,7 @@ public class Menu {
         String menu2Variable="";
         llistaProductes = greenClick.buscarProducto(busqueda,filtre);
         for (int i = 0; i < llistaProductes.size(); i++ ){
-            menu2Variable += "["+(i+3)+"] "+ llistaProductes.get(i).getNombre()+"\n";
+            menu2Variable += "["+(i+3)+"] "+ llistaProductes.get(i).getNombre()+" Origen: "+ llistaProductes.get(i).getOrigen()+" Precio: "+ llistaProductes.get(i).getPrecio()  +"\n";
         }
         String menu2 = """
                         \nSelecciona un filtro:
@@ -185,6 +223,44 @@ public class Menu {
         modificarLista(llistaProductes, "ClassicBusqueda");
         int opcio = validificador("ClassicBusqueda");
         menuInter("ClassicBusqueda", opcio);
+    }
+
+    public static void ClassicOrigen(String busqueda) {
+        String menu2Variable="";
+        llistaProductes = greenClick.buscarProductoOrigen(busqueda);
+        for (int i = 0; i < llistaProductes.size(); i++ ){
+            menu2Variable += "["+(i+1)+"] "+ llistaProductes.get(i).getNombre() + " Precio: " + llistaProductes.get(i).getPrecio()  +"\n";
+        }
+        String menu2 = """
+                        \nUste esta buscando por el pais de Origen: """ + busquedaProd + "\n";
+
+        String menu21 = """
+                        -----------------
+                        [0] Endarrere
+                        """;
+        System.out.println(menu2+menu2Variable+menu21);
+        modificarLista(llistaProductes, "ClassicOrigen");
+        int opcio = validificador("ClassicOrigen");
+        menuInter("ClassicOrigen", opcio);
+    }
+    public static void Carrito() {
+        String menu2Variable="";
+        llistaProductes = greenClick.buscarProductoOrigen();//AAQUI ES ON NO PUC POSAR
+        for (int i = 0; i < llistaProductes.size(); i++ ){
+            menu2Variable += "["+(i+1)+"] "+ llistaProductes.get(i).getNombre() + " Precio: " + llistaProductes.get(i).getPrecio()  +"\n";
+        }
+        String menu2 = """
+                        \nCarrito: 
+                        """;
+
+        String menu21 = """
+                        -----------------
+                        [0] Endarrere
+                        """;
+        System.out.println(menu2+menu2Variable+menu21);
+        modificarLista(llistaProductes, "Carrito");
+        int opcio = validificador("Carrito");
+        menuInter("Carrito", opcio);
     }
 
     public static void AClassic() {
@@ -228,7 +304,9 @@ public class Menu {
 
             }
             else if (numero == 3) {
-                Credits();
+                System.out.println("Introduce el Origen del producto que desea buscar");
+                busquedaProd = scannerS.nextLine();
+                ClassicOrigen(busquedaProd);
             }
         }
         else if (menu.equals("Classic")) {
@@ -245,7 +323,7 @@ public class Menu {
                 Principal();
             }
             else if (numero == 1) {
-                Classic(1 );
+                Classic(1);
             }
             else if (numero == 2) {
                 Classic(2);
@@ -269,6 +347,20 @@ public class Menu {
             }
             else if (numero == 2) {
                 ClassicBusqueda(2,busquedaProd);
+            }
+        }
+        else if (menu.equals("ClassicOrigen")) {
+            if (numero > 0) {
+                System.out.println("Añade la cantidad de producto deseada");
+                int cantidad;
+                cantidad = scannerI.nextInt();
+                carrito.agregarAlCarrito(llistaProductes.get(numero-1), cantidad );
+                System.out.println("Usted ha añadido " +llistaProductes.get(numero-1).getNombre() + " con " + cantidad + " unidades a la cesta");
+                carrito.generarFactura();
+                ClassicOrigen(busquedaProd);
+            }
+            else if (numero == 0) {
+                Principal();
             }
         }
         else if (menu.equals("AClassic")) {
@@ -300,6 +392,25 @@ public class Menu {
                     valor++;
                 }
                 RClassicBusqueda.add(valor);
+                //System.out.println("["+(i+3)+"]"+ opcions.get(i).getNombre());
+            }
+        }
+        else if (menu.equals("ClassicOrigen")) {
+            for (int i = 0; i < opcions.size(); i++) {
+                while (RClassicOrigen.contains(valor)) {
+                    valor++;
+                }
+                RClassicOrigen.add(valor);
+                //System.out.println("["+(i+3)+"]"+ opcions.get(i).getNombre());
+            }
+        }
+
+        else if (menu.equals("Carrito")) {
+            for (int i = 0; i < opcions.size(); i++) {
+                while (RClassicOrigen.contains(valor)) {
+                    valor++;
+                }
+                RClassicOrigen.add(valor);
                 //System.out.println("["+(i+3)+"]"+ opcions.get(i).getNombre());
             }
         }
