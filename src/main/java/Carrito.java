@@ -35,6 +35,10 @@ public class Carrito {
         }
     }
 
+    public int getStockProducte(Producte prod) {
+        return lista.get(prod.getNombre());
+    }
+
     public void eliminarDelCarrito(Producte prod, int cantidad) {
         if (lista.get(prod.getNombre()) != null) {
             if (lista.get(prod.getNombre()) > cantidad) {
@@ -60,6 +64,7 @@ public class Carrito {
         }
         System.out.println(String.format("Precio final: %.2f€", precioTotal));
     }
+
     public ArrayList<Producte> getProductesCarrito() {
         ArrayList<Producte> productesCarrito = new ArrayList<>();
         for (Producte producte : listaProductes) {
