@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Carrito {
     private Botiga botiga;
     private Usuari user;
     private Hashtable<String, Integer> lista = new Hashtable<>();
+    private ArrayList<Producte> listaProductes = new ArrayList<>();
     private double precioTotal;
 
     public Carrito(Botiga botiga, Usuari user) {
@@ -16,6 +18,7 @@ public class Carrito {
             if (botiga.getStock(prod) >= cantidad) {
                 lista.put(prod.getNombre(), cantidad);
                 precioTotal += prod.getPrecio() * cantidad;
+                listaProductes.add(prod);
             }
             else {
                 System.out.println("No hay suficiente stock");
@@ -40,6 +43,7 @@ public class Carrito {
             } else if (lista.get(prod.getNombre()) == cantidad) {
                 precioTotal -= prod.getPrecio() * cantidad;
                 lista.remove(prod.getNombre());
+                listaProductes.remove(prod);
             } else  {
                 System.out.println("No puedes eliminar mas cantidad de un producto de lo que tienes al carrito");
             }
@@ -55,6 +59,14 @@ public class Carrito {
             System.out.println(String.format("%s: %d", producte, cantidad));
         }
         System.out.println(String.format("Precio final: %.2f€", precioTotal));
+    }
+    public ArrayList<Producte> getProductesCarrito() {
+        ArrayList<Producte> productesCarrito = new ArrayList<>();
+        for (Producte producte : listaProductes) {
+            //int cantidad = lista.get(producte.getNombre());
+            productesCarrito.add(producte);
+        }
+        return productesCarrito;
     }
 
     public void pagar() {

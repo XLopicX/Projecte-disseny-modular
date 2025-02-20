@@ -88,7 +88,7 @@ public class Botiga {
         return this.Productes;
     }
 
-    public ArrayList buscarProductoOrigen(String input) {
+    public ArrayList<Producte> buscarProductoOrigen(String input) {
         ArrayList<Producte> producteBuscat = new ArrayList<>();
         for (Producte prod : Productes) {
             if (prod.getOrigen().equals(input)) {
