@@ -38,9 +38,6 @@ public class Menu {
     static ArrayList<Integer> RClassicBusqueda = new ArrayList<>(Arrays.asList(1,2,0));
     static ArrayList<Integer> RClassicOrigen = new ArrayList<>(Arrays.asList(0));
     static ArrayList<Integer> RCarrito = new ArrayList<>(Arrays.asList(1,0));
-    static List<Integer> RAClassic = Collections.singletonList(1);
-    static List<Integer> RCredits = Collections.singletonList(1);
-
     public static int validificador(String menu) {
         boolean valid = false;
         int opcio = 0;
@@ -120,38 +117,6 @@ public class Menu {
                         valid = true;
                     }
                     else {
-                        System.out.println("Resposta Invalida");
-                    }
-                }
-                catch (Exception e) {
-                    System.out.println("Resposta Invalida");
-                    scanner.reset();
-                }
-            }
-        }
-        else if (menu.equals("AClassic")) {
-            while (!valid) {
-                try {
-                    opcio = scanner.nextInt();
-                    if (RAClassic.contains(opcio)) {
-                        valid = true;
-                    } else {
-                        System.out.println("Resposta Invalida");
-                    }
-                }
-                catch (Exception e) {
-                    System.out.println("Resposta Invalida");
-                    scanner.reset();
-                }
-            }
-        }
-        else if (menu.equals("Credits")) {
-            while (!valid) {
-                try {
-                    opcio = scanner.nextInt();
-                    if (RCredits.contains(opcio)) {
-                        valid = true;
-                    } else {
                         System.out.println("Resposta Invalida");
                     }
                 }
@@ -271,34 +236,6 @@ public class Menu {
         menuInter("Carrito", opcio);
     }
 
-    public static void AClassic() {
-        String menu3 = """
-            \nFacil = Numero aleatori entre 0 i 25 amb 10 intents
-            Intermitg = Numero aleatori entre 0 i 50 amb 15 intents
-            Dificil = Numero aleatori entre 0 i 100 amb 20 intents
-                                  
-            [1] Endarrere
-             """;
-        System.out.println(menu3);
-        int opcio = validificador("AClassic");
-        menuInter("AClassic", opcio);
-    }
-
-    public static void Credits() {
-        String menu3 = """
-            \nCreat per Ferran Gimenez Figuerola
-            A data de: 09/10/2024
-            
-            Fonts d'informacio:
-            https://stackoverflow.com/questions/1005073/initialization-of-an-arraylist-in-one-line
-            
-            [1] Endarrere
-             """;
-        System.out.println(menu3);
-        int opcio = validificador("Credits");
-        menuInter("Credits", opcio);
-    }
-
     public static void menuInter(String menu, int numero) {
 
         if (menu.equals("Principal")) {
@@ -383,16 +320,6 @@ public class Menu {
                 carrito.pagar();
             }
             else if (numero == 0) {
-                Principal();
-            }
-        }
-        else if (menu.equals("AClassic")) {
-            if (numero == 1) {
-                Classic(0);
-            }
-        }
-        else if (menu.equals("Credits")) {
-            if (numero == 1) {
                 Principal();
             }
         }
