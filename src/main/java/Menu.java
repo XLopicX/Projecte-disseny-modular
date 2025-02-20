@@ -245,7 +245,7 @@ public class Menu {
     }
     public static void Carrito() {
         String menu2Variable="";
-        llistaProductes = greenClick.buscarProductoOrigen();//AAQUI ES ON NO PUC POSAR
+        llistaProductes = carrito.getProductesCarrito(); //AAQUI ES ON NO PUC POSAR
         for (int i = 0; i < llistaProductes.size(); i++ ){
             menu2Variable += "["+(i+1)+"] "+ llistaProductes.get(i).getNombre() + " Precio: " + llistaProductes.get(i).getPrecio()  +"\n";
         }
