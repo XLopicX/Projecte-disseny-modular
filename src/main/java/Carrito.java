@@ -35,7 +35,7 @@ public class Carrito {
         }
     }
 
-    public int getStockProducte(Producte prod) {
+    public int getCantitatProducte(Producte prod) {
         return lista.get(prod.getNombre());
     }
 
